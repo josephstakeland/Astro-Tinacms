@@ -1,10 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Products from '.././components/Products.astro';
+import Section_products from '../components/Section_products.astro';
+
+const data = await fetch('http://astros-worpress-headless.local/wp-json/wp/v2/products?acf_format=standard&_fields=id,title,acf');
+const datos = await data.json();
+console.log(datos)
+
+const dataProducts = datos[0].acf
 ---
 
 <Layout title="home">
 		
-		<Products></Products>
+		<Section_products/>
 </Layout>
 
