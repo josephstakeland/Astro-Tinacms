@@ -1,22 +1,16 @@
 ---
-import Product from '../components/Product.astro'
+import CardProduct from './CardProduct.astro'
 
 
 //const data = await fetch('http://astros-worpress-headless.local/wp-json/wp/v2/streaming?acf_format=standard&_fields=id,title,type,acf');
-const data = await fetch('http://astros-worpress-headless.local/wp-json/wp/v2/streaming?acf_format=standard&_fields=id,title,type,acf');
+const data = await fetch('http://astros-worpress-headless.local/wp-json/wp/v2/streaming?acf_format=standard&_fields=id,title,slug,type,acf');
 const datos = await data.json();
 //console.log(datos[0].acf)
-
-const dataProducts = datos;
-//const dataProducts = datos;
 
 //const categories = datos;
 const dataPost = datos;
 
-dataPost.forEach((service: any) => {
-    //console.log(service.acf);
-});
-console.log(dataPost)
+//console.log(dataPost);
 
 
 
@@ -37,10 +31,12 @@ console.log(dataPost)
     {
         dataPost.map(item => {
         return (
-                <Product
+                <CardProduct
                 title={item.acf.title_name}
                 cost={item.acf.price}
                 image={item.acf.tumbnail}
+                hre={`/product-page/`}
+                slug={item.slug}
                 />
             );
         })
