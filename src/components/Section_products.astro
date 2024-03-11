@@ -2,17 +2,8 @@
 import CardProduct from './CardProduct.astro'
 
 
-//const data = await fetch('http://astros-worpress-headless.local/wp-json/wp/v2/streaming?acf_format=standard&_fields=id,title,type,acf');
-const data = await fetch('http://astros-worpress-headless.local/wp-json/wp/v2/streaming?acf_format=standard&_fields=id,title,slug,type,acf');
-const datos = await data.json();
-//console.log(datos[0].acf)
-
-//const categories = datos;
-const dataPost = datos;
-
-//console.log(dataPost);
-
-
+const {datos} = Astro.props;
+console.log(datos);
 
 ---
 <!-- source: https://github.com/mfg888/Responsive-Tailwind-CSS-Grid/blob/main/index.html -->
@@ -28,19 +19,19 @@ const dataPost = datos;
 
 
 <!-- Render array of products as a list in the HTML -->
-    {
-        dataPost.map(item => {
-        return (
-                <CardProduct
-                title={item.acf.title_name}
-                cost={item.acf.price}
-                image={item.acf.tumbnail}
-                hre={`/product-page/`}
-                slug={item.slug}
-                />
-            );
-        })
-    }
+{
+    datos.map(item => {
+      return (
+        <CardProduct
+          key={item.id} // Agregar una clave única para cada elemento
+          title={item.acf.title_name}
+          cost={item.acf.price}
+          image={item.acf.tumbnail}
+          hre={item.slug} // Adaptar la ruta según la estructura de tu proyecto
+        />
+      );
+    })
+  }
     
 
 <!--

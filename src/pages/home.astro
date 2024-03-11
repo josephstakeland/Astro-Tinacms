@@ -2,15 +2,32 @@
 import Layout from '../layouts/Layout.astro';
 import Section_products from '../components/Section_products.astro';
 
-const data = await fetch('http://astros-worpress-headless.local/wp-json/wp/v2/products?acf_format=standard&_fields=id,title,acf');
-const datos = await data.json();
-console.log(datos)
+const data = await fetch('http://astro-wp-headless.local/wp-json/wp/v2/streaming?acf_format=standard&_fields=id,title,slug,acf');
 
-const dataProducts = datos[0].acf
+const datos = await data.json();
+//console.log(datos[0].acf)
+
+//const categories = datos;
+//const dataPost = datos;
+
+//console.log(dataPost);
+
+
+//console.log(slugs);
 ---
 
 <Layout title="home">
+
+{
+	datos.map(item => {
+        
+	return (
+		<Section_products
+		datos={datos}
+		/>
+	);
+    })
+}
 		
-		<Section_products/>
 </Layout>
 
