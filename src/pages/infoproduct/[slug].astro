@@ -4,7 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 //const { title, cost, image, hre, slug } = Astro.props;
 export const prerender = true;
 export async function getStaticPaths (){
-  const data = await fetch('http://astro-wp-headless.local/wp-json/wp/v2/streaming?acf_format=standard&_fields=id,title,slug,acf');
+  const data = await fetch('http://astros-worpress-headless.local/wp-json/wp/v2/streaming?acf_format=standard&_fields=id,title,slug,acf');
   const datos = await data.json();
   const dataProducts = datos
   return dataProducts.map((dataProducts) => ({
@@ -23,9 +23,6 @@ console.log(Astro.props)
 const {title_name ,price ,tumbnail }= Astro.props.dataProducts.acf;
 ---
 <Layout title="product">
-  <div class="text-center p-10">
-</div>
-
 <section class="text-gray-700 body-font overflow-hidden bg-white">
 	<div class="container px-5 py-24 mx-auto">
 	  <div class="lg:w-4/5 mx-auto flex flex-wrap">

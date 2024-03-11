@@ -1,8 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Section_products from '../components/Section_products.astro';
+import { API_REQ_1, API_REQ_2 } from '../../public/APIwp.js'; // Adjust path if needed
 
-const data = await fetch('http://astro-wp-headless.local/wp-json/wp/v2/streaming?acf_format=standard&_fields=id,title,slug,acf');
+const data = await fetch(API_REQ_2);
 
 const datos = await data.json();
 //console.log(datos[0].acf)
@@ -13,21 +14,13 @@ const datos = await data.json();
 //console.log(dataPost);
 
 
-//console.log(slugs);
+console.log(API_REQ_2);
 ---
 
 <Layout title="home">
 
-{
-	datos.map(item => {
-        
-	return (
 		<Section_products
 		datos={datos}
 		/>
-	);
-    })
-}
 		
 </Layout>
-
